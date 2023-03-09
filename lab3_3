@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class lab3_3 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Удалю из массива элементы, идущие не по возрастанию");
+        System.out.println();
+        System.out.print("Введите размер массива: ");
+        int size;
+        do{
+            while (!in.hasNextInt()) {
+                System.out.println("Ошибка!");
+                System.out.print("Введите целое число: ");
+                in.next();
+            }
+            size = in.nextInt();
+            if(size<0){
+                System.out.println("Размер не может быть меньше 0");
+                System.out.print("Введите целое число: ");
+            }
+        }while(size<0);
+        System.out.println();
+        float[] array = new float[size];
+        for (int i = 0; i < size; i++){
+            System.out.print("Введите " + (i+1) + " элемент: ");
+            while (!in.hasNextFloat()) {
+                System.out.println("Ошибка!");
+                System.out.print("Введите число: ");
+                in.next();
+            }
+            array[i] = in.nextFloat();
+        }
+        System.out.println();
+        System.out.print("Полученный массив: [ ");
+        float biggest = array[0];
+        int t_size = 1;
+        for(float elem : array){
+            System.out.print(elem + " ");
+            if (elem > biggest){
+                biggest = elem;
+                t_size++;
+            }
+        }
+        System.out.print("]");
+        System.out.println();
+        float[] time_array = new float[t_size];
+        int t = 1;
+        biggest = array[0];
+        time_array[0] = biggest;
+        for(int i = 1; i < size; i++){
+            if (array[i] > biggest){
+                biggest = array[i];
+                time_array[t] = array[i];
+                t++;
+            }
+        }
+        array = new float[t_size];
+        System.out.print("Обработанный массив: [ ");
+        for(int i = 0; i < t_size; i++){
+            array[i] = time_array[i];
+            System.out.print(array[i] + " ");
+        }
+        System.out.print("]");
+        in.close();
+    }
+}
